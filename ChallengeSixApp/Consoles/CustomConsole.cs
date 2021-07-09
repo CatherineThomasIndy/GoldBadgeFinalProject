@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ChallengeSixApp.Consoles
 {
-    public class CustomConsole
+    public class CustomConsole : ICustomConsole
     {
         public void AnyKey()
         {
