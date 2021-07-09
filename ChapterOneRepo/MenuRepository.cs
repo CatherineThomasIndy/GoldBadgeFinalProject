@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace ChapterOneRepo
 {
-    public class Class1
+    public class MenuRepository
     {
+        //Create a menu item
+
+        //Receive a list of all items
+
+        //Delete menu items
     }
 }

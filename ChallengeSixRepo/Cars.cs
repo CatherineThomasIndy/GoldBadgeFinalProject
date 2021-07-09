@@ -6,7 +6,18 @@ using System.Threading.Tasks;
 
 namespace ChallengeSixRepo
 {
-    public class Class1
+    public class ElectricCar : ICar
     {
+
+    }
+
+    public class HybridCar : ICar
+    {
+
+    }
+
+    public class GasCar : ICar
+    {
+
     }
 }
