@@ -1,4 +1,5 @@
 ﻿using ChapterOne.Consoles;
+using ChapterOneRepo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace ChapterOne
     {
         private bool _isRunning = true;
         private readonly ICustomConsole _con;
+        private readonly MenuRepository _menuRepo = new MenuRepository();
         public ProgramUI(ICustomConsole console)
         {
             _con = console;
