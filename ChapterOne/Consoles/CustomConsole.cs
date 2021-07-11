@@ -35,7 +35,18 @@ namespace ChapterOne.Consoles
 
         public void PrintMenu()
         {
-            Console.WriteLine("");
+            Console.WriteLine("Welcome to the Komodo Cafe Menu database. This is the Main Menu.\n" +
+                "Select what you would like to do by entering the number that corresponds to the desired option:\n" +
+                "1. See the full list of menu items.\n" +
+                "2. Add a new meal to the menu.\n" +
+                "3. Remove a meal from the menu.\n" +
+                "4. Exit program.\n" +
+                "");
+        }
+
+        public void InvalidSelection()
+        {
+            Console.WriteLine("Input was invalid.\n");
         }
     }
 }

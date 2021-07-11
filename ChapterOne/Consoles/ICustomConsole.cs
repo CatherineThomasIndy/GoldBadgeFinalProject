@@ -14,6 +14,7 @@ namespace ChapterOne.Consoles
         void AnyKey();
         void Write(string text);
         void PrintMenu();
+        void InvalidSelection();
 
     }
 }

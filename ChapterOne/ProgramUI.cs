@@ -43,11 +43,69 @@ namespace ChapterOne
         private void OpenMenuItem(string userInput)
         {
             _con.Clear();
-
+            /*"1. See the full list of menu items.\n" +
+                "2. Add a new meal to the menu.\n" +
+                "3. Remove a meal from the menu.\n" +
+                "4. Exit program.*/
             switch (userInput)
             {
-
+                case "1":
+                    SeeFullMenu();
+                    _con.AnyKey();
+                    _con.ReadKey();
+                    RunMenu();
+                    break;
+                case "2":
+                    AddNewMeal();
+                    break;
+                case "3":
+                    RemoveMeal();
+                    break;
+                case "4":
+                    _con.Write("Do you really want to exit? (y/n)\n");
+                    string reallyExit = _con.ReadLine().ToLower();
+                    if (reallyExit == "y")
+                    {
+                        _con.Write("Good-bye!");
+                        _con.ReadKey();
+                        _isRunning = false;
+                    }
+                    else if (reallyExit == "n")
+                    {
+                        _con.AnyKey();
+                        _con.ReadKey();
+                        RunMenu();
+                    }
+                    else
+                    {
+                        _con.InvalidSelection();
+                        _con.AnyKey();
+                        _con.ReadKey();
+                        RunMenu();
+                    }
+                    break;
+                default:
+                    _con.InvalidSelection();
+                    _con.AnyKey();
+                    _con.ReadKey();
+                    RunMenu();
+                    break;
             }
+        }
+
+        private void SeeFullMenu()
+        {
+
+        }
+
+        private void AddNewMeal()
+        {
+
+        }
+
+        private void RemoveMeal()
+        {
+
         }
     }
 }
