@@ -10,10 +10,6 @@ namespace ChapterOneRepo
     {
         public List<Menu> _menuItems = new List<Menu>();
 
-        public List<Menu> GetList()
-        {
-            return _menuItems;
-        }
         //Create a menu item
         public bool AddItemToMenu(Menu item)
         {

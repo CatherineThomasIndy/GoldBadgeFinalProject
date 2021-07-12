@@ -95,9 +95,17 @@ namespace ChapterOne
 
         private void SeeFullMenu()
         {
+            PrintMenuItems();
+            _con.AnyKey();
+            _con.ReadKey();
+            RunMenu();
+        }
+
+        private void PrintMenuItems()
+        {
             _con.Clear();
             List<Menu> menuItems = _menuRepo.GetAllMenuItems();
-            foreach(Menu item in menuItems)
+            foreach (Menu item in menuItems)
             {
                 Console.WriteLine($"Number: {item.MealNumber}\n" +
                     $"Name: {item.MealName}\n" +
@@ -105,9 +113,6 @@ namespace ChapterOne
                     $"Ingredients: {item.Ingredients}\n" +
                     $"Price: {item.Price}\n");
             }
-            _con.AnyKey();
-            _con.ReadKey();
-            RunMenu();
         }
         //public Menu(int mealNumber, string mealName, string description, List<string> ingredients, decimal price)
         private void AddNewMeal()
@@ -122,20 +127,20 @@ namespace ChapterOne
             List<string> ingredients = ingredientString.Split(',').ToList();
             _con.Write("Enter the price of the new meal:\n");
             decimal price = decimal.Parse(_con.ReadLine());
-            List<Menu> menuItemList = _menuRepo.GetList();
+            List<Menu> menuItemList = _menuRepo.GetAllMenuItems();
             int menuCount = menuItemList.Count;
             int mealNumber = menuCount + 1;
             Menu item = new Menu(mealNumber, mealName, description, ingredients, price);
             _menuRepo.AddItemToMenu(item);
             if (menuItemList.Contains(item))
             {
-                _con.Write("The new meal was successfully added!");
+                _con.Write("The new meal was successfully added!\n");
                 _con.AnyKey();
                 RunMenu();
             }
             else
             {
-                _con.Write("Something went wrong. The meal could not be added.");
+                _con.Write("Something went wrong. The meal could not be added.\n");
                 _con.AnyKey();
                 RunMenu();
             }
@@ -144,7 +149,36 @@ namespace ChapterOne
 
         private void RemoveMeal()
         {
-
+            List<Menu> listOfMenuItems = _menuRepo.GetAllMenuItems();
+            int initialMenuItemCount = listOfMenuItems.Count;
+            PrintMenuItems();
+            _con.Write("Enter the meal number of the meal you would like to remove from the menu:\n");
+            int mealToDelete = int.Parse(_con.ReadLine());
+            Menu item = _menuRepo.GetMenuItemByMenuItemNumber(mealToDelete);
+            if(item != null)
+            {
+                _menuRepo.DeleteMenuItemByNumber(mealToDelete);
+                List<Menu> updatedListOfMenuItems = _menuRepo.GetAllMenuItems();
+                int updatedMenuItemCount = updatedListOfMenuItems.Count;
+                if(updatedMenuItemCount == initialMenuItemCount - 1)
+                {
+                    _con.Write("The meal was successfully removed from the menu!\n");
+                    _con.AnyKey();
+                    RunMenu();
+                }
+                else
+                {
+                    _con.Write("Something went wrong. The meal could not be removed from the menu.\n");
+                    _con.AnyKey();
+                    RunMenu();
+                }
+            }
+            else
+            {
+                _con.Write("Something went wrong. The meal could not be removed from the menu.\n");
+                _con.AnyKey();
+                RunMenu();
+            }
         }
     }
 }
