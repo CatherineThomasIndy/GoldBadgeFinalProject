@@ -95,11 +95,50 @@ namespace ChapterOne
 
         private void SeeFullMenu()
         {
-
+            _con.Clear();
+            List<Menu> menuItems = _menuRepo.GetAllMenuItems();
+            foreach(Menu item in menuItems)
+            {
+                Console.WriteLine($"Number: {item.MealNumber}\n" +
+                    $"Name: {item.MealName}\n" +
+                    $"Description: {item.Description}\n" +
+                    $"Ingredients: {item.Ingredients}\n" +
+                    $"Price: {item.Price}\n");
+            }
+            _con.AnyKey();
+            _con.ReadKey();
+            RunMenu();
         }
-
+        //public Menu(int mealNumber, string mealName, string description, List<string> ingredients, decimal price)
         private void AddNewMeal()
         {
+            _con.Clear();
+            _con.Write("What is the name of the new meal?\n");
+            string mealName = _con.ReadLine();
+            _con.Write("Describe the new meal:\n");
+            string description = _con.ReadLine();
+            _con.Write("List each ingredient in the meal separated by commas (ex: 'cheese,pasta,tomato' etc.):\n");
+            string ingredientString = _con.ReadLine();
+            List<string> ingredients = ingredientString.Split(',').ToList();
+            _con.Write("Enter the price of the new meal:\n");
+            decimal price = decimal.Parse(_con.ReadLine());
+            List<Menu> menuItemList = _menuRepo.GetList();
+            int menuCount = menuItemList.Count;
+            int mealNumber = menuCount + 1;
+            Menu item = new Menu(mealNumber, mealName, description, ingredients, price);
+            _menuRepo.AddItemToMenu(item);
+            if (menuItemList.Contains(item))
+            {
+                _con.Write("The new meal was successfully added!");
+                _con.AnyKey();
+                RunMenu();
+            }
+            else
+            {
+                _con.Write("Something went wrong. The meal could not be added.");
+                _con.AnyKey();
+                RunMenu();
+            }
 
         }
 
