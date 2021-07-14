@@ -20,6 +20,7 @@ namespace ChapterOne
 
         public void Run()
         {
+            SeedList();
             RunMenu();
         }
 
@@ -155,23 +156,27 @@ namespace ChapterOne
             int initialMenuItemCount = listOfMenuItems.Count;
             PrintMenuItems();
             _con.Write("Enter the meal number of the meal you would like to remove from the menu:\n");
-            int mealToDelete = int.Parse(_con.ReadLine());
+            string mealToDeleteAsString = _con.ReadLine();
+            int mealToDelete;
+            int.TryParse(mealToDeleteAsString, out mealToDelete);j
             Menu item = _menuRepo.GetMenuItemByMenuItemNumber(mealToDelete);
-            if(item != null)
+            if (item != null)
             {
                 _menuRepo.DeleteMenuItemByNumber(mealToDelete);
                 List<Menu> updatedListOfMenuItems = _menuRepo.GetAllMenuItems();
                 int updatedMenuItemCount = updatedListOfMenuItems.Count;
-                if(updatedMenuItemCount == initialMenuItemCount - 1)
+                if (updatedMenuItemCount == initialMenuItemCount - 1)
                 {
                     _con.Write("The meal was successfully removed from the menu!\n");
                     _con.AnyKey();
+                    _con.ReadKey();
                     RunMenu();
                 }
                 else
                 {
                     _con.Write("Something went wrong. The meal could not be removed from the menu.\n");
                     _con.AnyKey();
+                    _con.ReadKey();
                     RunMenu();
                 }
             }
@@ -183,36 +188,58 @@ namespace ChapterOne
             }
         }
 
-        private List<string> AddIngredients()
+        private void AddIngredients()
         {
-            bool enteringIngredients = true;
-            List<string> ingredients = new List<string>();
-            while (enteringIngredients)
+            List<Menu> listOfMenuItems = _menuRepo.GetAllMenuItems();
+            PrintMenuItems();
+            _con.Write("Enter the meal number of the meal to which you would like to add ingredients:\n");
+            int mealForIngredientsToAdd = int.Parse(_con.ReadLine());
+            Menu item = _menuRepo.GetMenuItemByMenuItemNumber(mealForIngredientsToAdd);
+            if (item != null)
             {
-                _con.Write("Would you like to enter an ingredient?\n" +
-                "1. Yes\n" +
-                "2. No\n");
-                string input = _con.ReadLine();
-                switch (input)
+                List<string> listOfIngredients = new List<string>();
+                _con.Write("Enter an ingredient:\n");
+                string firstIngredient = _con.ReadLine();
+                listOfIngredients.Add(firstIngredient);
+                bool enteringIngredients = true;
+                while (enteringIngredients)
                 {
-                    case "1":
-                        _con.Write("Enter an ingredient:");
-                        string ingredientInput = _con.ReadLine();
-                        ingredients.Add(ingredientInput);
-                        break;
-                    case "2":
-                        enteringIngredients = false;
-                        break;
-                    default:
-                        _con.InvalidSelection();
-                        _con.AnyKey();
-                        _con.ReadKey();
-                        RunMenu();
-                        break;
+                    _con.Write("Would you like to enter another ingredient?\n" +
+                        "1. Yes\n" +
+                        "2. No\n");
+                    string input = _con.ReadLine();
+                    switch (input)
+                    {
+                        case "1":
+                            string nextIngredient = _con.ReadLine();
+                            listOfIngredients.Add(nextIngredient);
+                            return;
+                        case "2":
+                            enteringIngredients = false;
+                            break;
+                        default:
+                            _con.InvalidSelection();
+                            _con.AnyKey();
+                            _con.ReadKey();
+                            RunMenu();
+                            break;
+                    }
                 }
+                item.Ingredients = listOfIngredients;
             }
-            return ingredients;
+            else
+            {
+                _con.Write("That meal isn't on the menu.");
+                _con.AnyKey();
+                _con.ReadKey();
+                RunMenu();
+            }
         }
 
+        private void SeedList()
+        {
+            Menu hamburger = new Menu(1, "Hamburger", "A beef patty on a bun with customizable fixins.", 5.00m);
+            _menuRepo.AddItemToMenu(hamburger);
+        }
     }
 }
