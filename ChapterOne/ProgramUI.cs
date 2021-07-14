@@ -63,28 +63,9 @@ namespace ChapterOne
                     RemoveMeal();
                     break;
                 case "4":
-                    _con.Write("Do you really want to exit? (y/n)\n");
-                    string reallyExit = _con.ReadLine().ToLower();
-                    if (reallyExit == "y")
-                    {
-                        _con.Write("Good-bye!");
-                        _con.ReadKey();
-                        _isRunning = false;
-                    }
-                    else if (reallyExit == "n")
-                    {
-                        _con.AnyKey();
-                        _con.ReadKey();
-                        RunMenu();
-                    }
-                    else
-                    {
-
-                        _con.InvalidSelection();
-                        _con.AnyKey();
-                        _con.ReadKey();
-                        RunMenu();
-                    }
+                    _con.Write("Good-bye!");
+                    _con.ReadKey();
+                    _isRunning = false;
                     break;
                 default:
                     _con.InvalidSelection();
@@ -109,11 +90,12 @@ namespace ChapterOne
             List<Menu> menuItems = _menuRepo.GetAllMenuItems();
             foreach (Menu item in menuItems)
             {
-                Console.WriteLine($"Number: {item.MealNumber}\n" +
+                _con.Write($"Number: {item.MealNumber}\n" +
                     $"Name: {item.MealName}\n" +
                     $"Description: {item.Description}\n" +
-                    $"Ingredients: {item.Ingredients}\n" +
-                    $"Price: {item.Price}\n");
+                    $"Price: {item.Price}\n" +
+                    $"Ingredients: {item.ListOfIngredients}" +
+                    $"");
             }
         }
         //public Menu(int mealNumber, string mealName, string description, List<string> ingredients, decimal price)
@@ -128,10 +110,19 @@ namespace ChapterOne
             string priceAsString = _con.ReadLine();
             decimal price;
             decimal.TryParse(priceAsString, out price);
+            if (price == 0m)
+            {
+                _con.Write("The price input was invalid. Please only use a numerical value such as 12.34.");
+                _con.AnyKey();
+                _con.ReadKey();
+                RunMenu();
+            }
+            _con.Write("Enter a list of ingredients (ex: beef, cheese, lettuce)");
+            string ingredients = _con.ReadLine();
             List<Menu> menuItemList = _menuRepo.GetAllMenuItems();
             int menuCount = menuItemList.Count;
             int mealNumber = menuCount + 1;
-            Menu item = new Menu(mealNumber, mealName, description, price);
+            Menu item = new Menu(mealNumber, mealName, description, ingredients, price);
             _menuRepo.AddItemToMenu(item);
             if (menuItemList.Contains(item))
             {
@@ -158,7 +149,7 @@ namespace ChapterOne
             _con.Write("Enter the meal number of the meal you would like to remove from the menu:\n");
             string mealToDeleteAsString = _con.ReadLine();
             int mealToDelete;
-            int.TryParse(mealToDeleteAsString, out mealToDelete);j
+            int.TryParse(mealToDeleteAsString, out mealToDelete);
             Menu item = _menuRepo.GetMenuItemByMenuItemNumber(mealToDelete);
             if (item != null)
             {
@@ -188,57 +179,9 @@ namespace ChapterOne
             }
         }
 
-        private void AddIngredients()
-        {
-            List<Menu> listOfMenuItems = _menuRepo.GetAllMenuItems();
-            PrintMenuItems();
-            _con.Write("Enter the meal number of the meal to which you would like to add ingredients:\n");
-            int mealForIngredientsToAdd = int.Parse(_con.ReadLine());
-            Menu item = _menuRepo.GetMenuItemByMenuItemNumber(mealForIngredientsToAdd);
-            if (item != null)
-            {
-                List<string> listOfIngredients = new List<string>();
-                _con.Write("Enter an ingredient:\n");
-                string firstIngredient = _con.ReadLine();
-                listOfIngredients.Add(firstIngredient);
-                bool enteringIngredients = true;
-                while (enteringIngredients)
-                {
-                    _con.Write("Would you like to enter another ingredient?\n" +
-                        "1. Yes\n" +
-                        "2. No\n");
-                    string input = _con.ReadLine();
-                    switch (input)
-                    {
-                        case "1":
-                            string nextIngredient = _con.ReadLine();
-                            listOfIngredients.Add(nextIngredient);
-                            return;
-                        case "2":
-                            enteringIngredients = false;
-                            break;
-                        default:
-                            _con.InvalidSelection();
-                            _con.AnyKey();
-                            _con.ReadKey();
-                            RunMenu();
-                            break;
-                    }
-                }
-                item.Ingredients = listOfIngredients;
-            }
-            else
-            {
-                _con.Write("That meal isn't on the menu.");
-                _con.AnyKey();
-                _con.ReadKey();
-                RunMenu();
-            }
-        }
-
         private void SeedList()
         {
-            Menu hamburger = new Menu(1, "Hamburger", "A beef patty on a bun with customizable fixins.", 5.00m);
+            Menu hamburger = new Menu(1, "Hamburger", "A beef patty on a bun with customizable fixins.", "Beef, hamburger bun", 5.00m);
             _menuRepo.AddItemToMenu(hamburger);
         }
     }
