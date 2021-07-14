@@ -16,12 +16,11 @@ namespace ChapterOneRepo
 
         public Menu(){ }
 
-        public Menu(int mealNumber, string mealName, string description, List<string> ingredients, decimal price)
+        public Menu(int mealNumber, string mealName, string description, decimal price)
         {
             MealNumber = mealNumber;
             MealName = mealName;
             Description = description;
-            Ingredients = ingredients;
             Price = price;
         }
     }

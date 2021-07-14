@@ -1,0 +1,6 @@
+C:\ElevenFiftyProjects\Assignments\GoldBadgeProject\GoldBadgeProject\ChapterOneRepo\bin\Debug\ChapterOneRepo.dll
+C:\ElevenFiftyProjects\Assignments\GoldBadgeProject\GoldBadgeProject\ChapterOneRepo\bin\Debug\ChapterOneRepo.pdb
+C:\ElevenFiftyProjects\Assignments\GoldBadgeProject\GoldBadgeProject\ChapterOneRepo\obj\Debug\ChallengeOneRepo.csproj.AssemblyReference.cache
+C:\ElevenFiftyProjects\Assignments\GoldBadgeProject\GoldBadgeProject\ChapterOneRepo\obj\Debug\ChallengeOneRepo.csproj.CoreCompileInputs.cache
+C:\ElevenFiftyProjects\Assignments\GoldBadgeProject\GoldBadgeProject\ChapterOneRepo\obj\Debug\ChapterOneRepo.dll
+C:\ElevenFiftyProjects\Assignments\GoldBadgeProject\GoldBadgeProject\ChapterOneRepo\obj\Debug\ChapterOneRepo.pdb

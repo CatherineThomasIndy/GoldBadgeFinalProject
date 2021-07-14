@@ -78,6 +78,7 @@ namespace ChapterOne
                     }
                     else
                     {
+
                         _con.InvalidSelection();
                         _con.AnyKey();
                         _con.ReadKey();
@@ -122,26 +123,27 @@ namespace ChapterOne
             string mealName = _con.ReadLine();
             _con.Write("Describe the new meal:\n");
             string description = _con.ReadLine();
-            _con.Write("List each ingredient in the meal separated by commas (ex: 'cheese,pasta,tomato' etc.):\n");
-            string ingredientString = _con.ReadLine();
-            List<string> ingredients = ingredientString.Split(',').ToList();
-            _con.Write("Enter the price of the new meal:\n");
-            decimal price = decimal.Parse(_con.ReadLine());
+            _con.Write("Enter the price of the new meal (ex: 12.34 for $12.34):\n");
+            string priceAsString = _con.ReadLine();
+            decimal price;
+            decimal.TryParse(priceAsString, out price);
             List<Menu> menuItemList = _menuRepo.GetAllMenuItems();
             int menuCount = menuItemList.Count;
             int mealNumber = menuCount + 1;
-            Menu item = new Menu(mealNumber, mealName, description, ingredients, price);
+            Menu item = new Menu(mealNumber, mealName, description, price);
             _menuRepo.AddItemToMenu(item);
             if (menuItemList.Contains(item))
             {
                 _con.Write("The new meal was successfully added!\n");
                 _con.AnyKey();
+                _con.ReadKey();
                 RunMenu();
             }
             else
             {
                 _con.Write("Something went wrong. The meal could not be added.\n");
                 _con.AnyKey();
+                _con.ReadKey();
                 RunMenu();
             }
 
@@ -180,5 +182,37 @@ namespace ChapterOne
                 RunMenu();
             }
         }
+
+        private List<string> AddIngredients()
+        {
+            bool enteringIngredients = true;
+            List<string> ingredients = new List<string>();
+            while (enteringIngredients)
+            {
+                _con.Write("Would you like to enter an ingredient?\n" +
+                "1. Yes\n" +
+                "2. No\n");
+                string input = _con.ReadLine();
+                switch (input)
+                {
+                    case "1":
+                        _con.Write("Enter an ingredient:");
+                        string ingredientInput = _con.ReadLine();
+                        ingredients.Add(ingredientInput);
+                        break;
+                    case "2":
+                        enteringIngredients = false;
+                        break;
+                    default:
+                        _con.InvalidSelection();
+                        _con.AnyKey();
+                        _con.ReadKey();
+                        RunMenu();
+                        break;
+                }
+            }
+            return ingredients;
+        }
+
     }
 }
