@@ -10,7 +10,7 @@ namespace ChapterOne.Consoles
     {
         public void AnyKey()
         {
-            Console.WriteLine("Press any key to return to the main menu.");
+            Console.WriteLine("\nPress any key to return to the main menu.");
         }
 
         public void Clear()

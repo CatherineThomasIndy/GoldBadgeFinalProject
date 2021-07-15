@@ -90,12 +90,16 @@ namespace ChapterOne
             List<Menu> menuItems = _menuRepo.GetAllMenuItems();
             foreach (Menu item in menuItems)
             {
-                _con.Write($"Number: {item.MealNumber}\n" +
+                Console.Write($"Number: {item.MealNumber}\n" +
                     $"Name: {item.MealName}\n" +
                     $"Description: {item.Description}\n" +
                     $"Price: {item.Price}\n" +
-                    $"Ingredients: {item.ListOfIngredients}" +
-                    $"");
+                    $"Ingredients: ");
+                foreach(string ingredient in item.ListOfIngredients)
+                {
+                    Console.Write(ingredient + ", "); 
+                }
+                _con.Write("\n");
             }
         }
         //public Menu(int mealNumber, string mealName, string description, List<string> ingredients, decimal price)
@@ -118,7 +122,8 @@ namespace ChapterOne
                 RunMenu();
             }
             _con.Write("Enter a list of ingredients (ex: beef, cheese, lettuce)");
-            string ingredients = _con.ReadLine();
+            string ingredientsAsString = _con.ReadLine();
+            List<string> ingredients = ingredientsAsString.Split(',').ToList();
             List<Menu> menuItemList = _menuRepo.GetAllMenuItems();
             int menuCount = menuItemList.Count;
             int mealNumber = menuCount + 1;
@@ -181,7 +186,8 @@ namespace ChapterOne
 
         private void SeedList()
         {
-            Menu hamburger = new Menu(1, "Hamburger", "A beef patty on a bun with customizable fixins.", "Beef, hamburger bun", 5.00m);
+            List<string> hamburgerIngredients = new List<string>() { "beef", "hamburger bun" };
+            Menu hamburger = new Menu(1, "Hamburger", "A beef patty on a bun with customizable fixins.", hamburgerIngredients, 5.00m);
             _menuRepo.AddItemToMenu(hamburger);
         }
     }
