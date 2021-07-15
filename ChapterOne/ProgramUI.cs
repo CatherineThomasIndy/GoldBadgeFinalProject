@@ -44,10 +44,6 @@ namespace ChapterOne
         private void OpenMenuItem(string userInput)
         {
             _con.Clear();
-            /*"1. See the full list of menu items.\n" +
-                "2. Add a new meal to the menu.\n" +
-                "3. Remove a meal from the menu.\n" +
-                "4. Exit program.*/
             switch (userInput)
             {
                 case "1":
@@ -102,7 +98,7 @@ namespace ChapterOne
                 _con.Write("\n");
             }
         }
-        //public Menu(int mealNumber, string mealName, string description, List<string> ingredients, decimal price)
+
         private void AddNewMeal()
         {
             _con.Clear();
