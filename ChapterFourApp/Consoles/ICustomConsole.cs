@@ -14,5 +14,6 @@ namespace ChapterFourApp.Consoles
         void AnyKey();
         void Write(string text);
         void PrintMenu();
+        void InvalidInput();
     }
 }

@@ -43,5 +43,10 @@ namespace ChapterFourApp.Consoles
                 "4. Display the cost of all outings\n" +
                 "5. Exit the app\n");
         }
+
+        public void InvalidInput()
+        {
+            Console.WriteLine("Input was invalid.");
+        }
     }
 }
