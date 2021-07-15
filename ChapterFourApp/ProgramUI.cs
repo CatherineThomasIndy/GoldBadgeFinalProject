@@ -1,4 +1,5 @@
 ﻿using ChapterFourApp.Consoles;
+using ChapterFourRepo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace ChapterFourApp
     {
         private bool _isRunning = true;
         private ICustomConsole _con;
+        private readonly OutingRepository _outingRepo = new OutingRepository();
         public ProgramUI(ICustomConsole console)
         {
             _con = console;
@@ -95,6 +97,11 @@ namespace ChapterFourApp
 
         }
 
-
+        private void SeedList()
+        {
+            DateTime golfTripJuneDate = new DateTime(2019, 6, 14);
+            Outing golfTripJune = new Outing(EventType.Golf, 20, golfTripJuneDate, 30m, 600m);
+            _outingRepo
+        }
     }
 }
