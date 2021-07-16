@@ -8,9 +8,9 @@ namespace ChapterFourRepo
 {
     public class OutingRepository
     {
-        public List<Outing> _listOfOutings = new List<Outing>();
+        public List<IOuting> _listOfOutings = new List<IOuting>();
         //Create an individual outing
-        public bool AddOutingToOutingList(Outing outing)
+        public bool AddOutingToOutingList(IOuting outing)
         {
             int listOfOutingsCount = _listOfOutings.Count();
             _listOfOutings.Add(outing);
@@ -21,20 +21,48 @@ namespace ChapterFourRepo
             else return false;
         }
         //Display a list of all outings
-        public List<Outing> GetAllOutings()
+        public List<IOuting> GetAllOutings()
         {
             return _listOfOutings;
         }
         //Display combined cost for all outings
-        public decimal CostOfAllOutingsByType(EventType eventType)
+        public decimal ReturnSumOfTotalCost(List<decimal> returnTotalCost)
         {
-            foreach (Outing outing in _listOfOutings)
+            decimal total = returnTotalCost.Sum();
+            return total;
+        }
+        public List<decimal> GetCostOfAllOutingsByType(EventType eventType)
+        {
+            List<decimal> returnTotalCost = new List<decimal>();
+            if(eventType == EventType.Golf)
             {
-                if (outing.EventType == eventType)
+                foreach(GolfOuting outing in _listOfOutings)
                 {
-                    
+                    returnTotalCost.Add(outing.TotalCost);
                 }
             }
+            else if(eventType == EventType.AmusementPark)
+            {
+                foreach (AmusementParkOuting outing in _listOfOutings)
+                {
+                    returnTotalCost.Add(outing.TotalCost);
+                }
+            }
+            else if(eventType == EventType.Bowling)
+            {
+                foreach (BowlingOuting outing in _listOfOutings)
+                {
+                    returnTotalCost.Add(outing.TotalCost);
+                }
+            }
+            else
+            {
+                foreach (ConcertOuting outing in _listOfOutings)
+                {
+                    returnTotalCost.Add(outing.TotalCost);
+                }
+            }
+            return returnTotalCost;
         }
         //Display outing costs by type
     }

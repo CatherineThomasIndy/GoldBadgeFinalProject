@@ -100,7 +100,7 @@ namespace ChapterFourApp
         private void SeedList()
         {
             DateTime golfTripJuneDate = new DateTime(2019, 6, 14);
-            Outing golfTripJune = new Outing(EventType.Golf, 20, golfTripJuneDate, 30m, 600m);
+            GolfOuting golfTripJune = new GolfOuting(20, golfTripJuneDate);
             _outingRepo
         }
     }
