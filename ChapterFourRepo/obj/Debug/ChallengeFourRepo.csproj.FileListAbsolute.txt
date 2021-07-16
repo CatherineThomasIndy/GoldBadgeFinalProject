@@ -3,3 +3,4 @@ C:\ElevenFiftyProjects\Assignments\GoldBadgeProject\GoldBadgeProject\ChapterFour
 C:\ElevenFiftyProjects\Assignments\GoldBadgeProject\GoldBadgeProject\ChapterFourRepo\obj\Debug\ChallengeFourRepo.csproj.CoreCompileInputs.cache
 C:\ElevenFiftyProjects\Assignments\GoldBadgeProject\GoldBadgeProject\ChapterFourRepo\obj\Debug\ChapterFourRepo.dll
 C:\ElevenFiftyProjects\Assignments\GoldBadgeProject\GoldBadgeProject\ChapterFourRepo\obj\Debug\ChapterFourRepo.pdb
+C:\ElevenFiftyProjects\Assignments\GoldBadgeProject\GoldBadgeProject\ChapterFourRepo\obj\Debug\ChallengeFourRepo.csproj.AssemblyReference.cache

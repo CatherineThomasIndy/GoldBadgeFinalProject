@@ -9,6 +9,10 @@ namespace ChapterFourRepo
     public class OutingRepository
     {
         public List<IOuting> _listOfOutings = new List<IOuting>();
+        public List<GolfOuting> _listOfGolfOutings = new List<GolfOuting>();
+        public List<BowlingOuting> _listOfBowlingOutings = new List<BowlingOuting>();
+        public List<AmusementParkOuting> _listOfAmuseParkOutings = new List<AmusementParkOuting>();
+        public List<ConcertOuting> _listOfConcertOutings = new List<ConcertOuting>();
         //Create an individual outing
         public bool AddOutingToOutingList(IOuting outing)
         {
@@ -31,38 +35,42 @@ namespace ChapterFourRepo
             decimal total = returnTotalCost.Sum();
             return total;
         }
-        public List<decimal> GetCostOfAllOutingsByType(EventType eventType)
+        //I have to do each of these individually or it will throw an InvalidCastException... FML
+        public List<decimal> GetCostOfGolfOutings()
         {
-            List<decimal> returnTotalCost = new List<decimal>();
-            if(eventType == EventType.Golf)
+            List<decimal> totalCost = new List<decimal>();
+            foreach(GolfOuting outing in _listOfGolfOutings)
             {
-                foreach(GolfOuting outing in _listOfOutings)
-                {
-                    returnTotalCost.Add(outing.TotalCost);
-                }
+                totalCost.Add(outing.TotalCost);
             }
-            else if(eventType == EventType.AmusementPark)
+            return totalCost;
+        }
+        public List<decimal> GetCostOfBowlingOutings()
+        {
+            List<decimal> totalCost = new List<decimal>();
+            foreach (BowlingOuting outing in _listOfBowlingOutings)
             {
-                foreach (AmusementParkOuting outing in _listOfOutings)
-                {
-                    returnTotalCost.Add(outing.TotalCost);
-                }
+                totalCost.Add(outing.TotalCost);
             }
-            else if(eventType == EventType.Bowling)
+            return totalCost;
+        }
+        public List<decimal> GetCostOfAmusementParkOutings()
+        {
+            List<decimal> totalCost = new List<decimal>();
+            foreach (AmusementParkOuting outing in _listOfAmuseParkOutings)
             {
-                foreach (BowlingOuting outing in _listOfOutings)
-                {
-                    returnTotalCost.Add(outing.TotalCost);
-                }
+                totalCost.Add(outing.TotalCost);
             }
-            else
+            return totalCost;
+        }
+        public List<decimal> GetCostOfConcertOutings()
+        {
+            List<decimal> totalCost = new List<decimal>();
+            foreach (ConcertOuting outing in _listOfConcertOutings)
             {
-                foreach (ConcertOuting outing in _listOfOutings)
-                {
-                    returnTotalCost.Add(outing.TotalCost);
-                }
+                totalCost.Add(outing.TotalCost);
             }
-            return returnTotalCost;
+            return totalCost;
         }
         //Display outing costs by type
         public List<decimal> GetCostOfAllOutings()

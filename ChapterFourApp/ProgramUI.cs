@@ -83,7 +83,7 @@ namespace ChapterFourApp
             foreach(IOuting outing in _outingRepo._listOfOutings)
             {
                 _con.Write($"Type of Event: {outing.EventType}\n" +
-                    $"Date of Event: {outing.Date}\n" +
+                    $"Date of Event: {outing.Date.ToShortDateString()}\n" +
                     $"Attendance: {outing.Attendance}\n" +
                     $"Cost per Person: {outing.CostPerPerson}\n" +
                     $"Total Cost of Outing: {outing.TotalCost}\n");
@@ -135,20 +135,20 @@ namespace ChapterFourApp
             switch (input)
             {
                 case "1":
-                    List<decimal> golfOutingsCost = _outingRepo.GetCostOfAllOutingsByType(EventType.Golf);
-                    PrintTotalCost(golfOutingsCost);
+                    List<decimal> golfOutingsCost = _outingRepo.GetCostOfGolfOutings();
+                    PrintTotalCost(EventType.Golf, golfOutingsCost);
                     break;
                 case "2":
-                    List<decimal> bowlingOutingsCost = _outingRepo.GetCostOfAllOutingsByType(EventType.Bowling);
-                    PrintTotalCost(bowlingOutingsCost);
+                    List<decimal> bowlingOutingsCost = _outingRepo.GetCostOfBowlingOutings();
+                    PrintTotalCost(EventType.Bowling, bowlingOutingsCost);
                     break;
                 case "3":
-                    List<decimal> amuseParkOutingsCost = _outingRepo.GetCostOfAllOutingsByType(EventType.AmusementPark);
-                    PrintTotalCost(amuseParkOutingsCost);
+                    List<decimal> amuseParkOutingsCost = _outingRepo.GetCostOfAmusementParkOutings();
+                    PrintTotalCost(EventType.AmusementPark, amuseParkOutingsCost);
                     break;
                 case "4":
-                    List<decimal> concertOutingsCost = _outingRepo.GetCostOfAllOutingsByType(EventType.Concert);
-                    PrintTotalCost(concertOutingsCost);
+                    List<decimal> concertOutingsCost = _outingRepo.GetCostOfConcertOutings();
+                    PrintTotalCost(EventType.Concert, concertOutingsCost);
                     break;
                 default:
                     _con.InvalidInput();
@@ -162,7 +162,7 @@ namespace ChapterFourApp
         private void DisplayCostOfAllOutings()
         {
             List<decimal> costOfAllOutings = _outingRepo.GetCostOfAllOutings();
-            PrintTotalCost(costOfAllOutings);
+            PrintTotalCostOfAllOutings(costOfAllOutings);
         }
 
         private void CreateGolfOuting()
@@ -171,6 +171,7 @@ namespace ChapterFourApp
             int attendance = Attendance();
             GolfOuting outing = new GolfOuting(attendance, eventDate);
             _outingRepo._listOfOutings.Add(outing);
+            _outingRepo._listOfGolfOutings.Add(outing);
             bool successfulAdd = _outingRepo.AddOutingToOutingList(outing);
             AddedBool(successfulAdd);
         }
@@ -180,6 +181,7 @@ namespace ChapterFourApp
             int attendance = Attendance();
             BowlingOuting outing = new BowlingOuting(attendance, eventDate);
             _outingRepo._listOfOutings.Add(outing);
+            _outingRepo._listOfBowlingOutings.Add(outing);
             bool successfulAdd = _outingRepo.AddOutingToOutingList(outing);
             AddedBool(successfulAdd);
         }
@@ -189,6 +191,7 @@ namespace ChapterFourApp
             int attendance = Attendance();
             AmusementParkOuting outing = new AmusementParkOuting(attendance, eventDate);
             _outingRepo._listOfOutings.Add(outing);
+            _outingRepo._listOfAmuseParkOutings.Add(outing);
             bool successfulAdd = _outingRepo.AddOutingToOutingList(outing);
             AddedBool(successfulAdd);
         }
@@ -198,6 +201,7 @@ namespace ChapterFourApp
             int attendance = Attendance();
             ConcertOuting outing = new ConcertOuting(attendance, eventDate);
             _outingRepo._listOfOutings.Add(outing);
+            _outingRepo._listOfConcertOutings.Add(outing);
             bool successfulAdd = _outingRepo.AddOutingToOutingList(outing);
             AddedBool(successfulAdd);
         }
@@ -209,9 +213,16 @@ namespace ChapterFourApp
             string month = _con.ReadLine();
             _con.Write("Enter the day of the month that the event occurred/will occur (DD):\n");
             string day = _con.ReadLine();
-            string date = year + month + day;
-            DateTime eventDate = DateTime.Parse(date);
-            return eventDate;
+            string date = $"{month}/{day}/{year}";
+            DateTime eventDate;
+            if (DateTime.TryParse(date, out eventDate))
+            {
+                return eventDate;
+            }
+            else
+            {
+                return DateTime.MaxValue;
+            }
         }
         private int Attendance()
         {
@@ -243,10 +254,18 @@ namespace ChapterFourApp
             _con.ReadKey();
             RunMenu();
         }
-        private void PrintTotalCost(List<decimal> outing)
+        private void PrintTotalCost(EventType eventType, List<decimal> outing)
         {
             decimal outingCostTotal = _outingRepo.ReturnSumOfTotalCost(outing);
-            _con.Write($"The total for all golf outings this year is ${outingCostTotal}\n");
+            _con.Write($"The total for all {eventType} events is ${outingCostTotal}\n");
+            _con.AnyKey();
+            _con.ReadKey();
+            RunMenu();
+        }
+        private void PrintTotalCostOfAllOutings(List<decimal> outing)
+        {
+            decimal outingCostTotal = _outingRepo.ReturnSumOfTotalCost(outing);
+            _con.Write($"The total for all outings is ${outingCostTotal}\n");
             _con.AnyKey();
             _con.ReadKey();
             RunMenu();
@@ -263,6 +282,11 @@ namespace ChapterFourApp
             ConcertOuting concertTripJuly = new ConcertOuting(36, concertTripJulyDate);
             DateTime amuseParkTripAugustDate = new DateTime(2019, 8, 20);
             AmusementParkOuting amuseParkTripAugust = new AmusementParkOuting(27, amuseParkTripAugustDate);
+            _outingRepo._listOfBowlingOutings.Add(bowlingTripJanuary);
+            _outingRepo._listOfGolfOutings.Add(golfTripMay);
+            _outingRepo._listOfGolfOutings.Add(golfTripJune);
+            _outingRepo._listOfConcertOutings.Add(concertTripJuly);
+            _outingRepo._listOfAmuseParkOutings.Add(amuseParkTripAugust);
             _outingRepo._listOfOutings.Add(bowlingTripJanuary);
             _outingRepo._listOfOutings.Add(golfTripMay);
             _outingRepo._listOfOutings.Add(golfTripJune);
