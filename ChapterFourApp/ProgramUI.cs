@@ -99,9 +99,21 @@ namespace ChapterFourApp
 
         private void SeedList()
         {
+            DateTime bowlingTripJanuaryDate = new DateTime(2019, 1, 21);
+            BowlingOuting bowlingTripJanuary = new BowlingOuting(25, bowlingTripJanuaryDate);
+            DateTime golfTripMayDate = new DateTime(2019, 5, 30);
+            GolfOuting golfTripMay = new GolfOuting(15, golfTripMayDate);
             DateTime golfTripJuneDate = new DateTime(2019, 6, 14);
             GolfOuting golfTripJune = new GolfOuting(20, golfTripJuneDate);
-            _outingRepo
+            DateTime concertTripJulyDate = new DateTime(2019, 7, 15);
+            ConcertOuting concertTripJuly = new ConcertOuting(36, concertTripJulyDate);
+            DateTime amuseParkTripAugustDate = new DateTime(2019, 8, 20);
+            AmusementParkOuting amuseParkTripAugust = new AmusementParkOuting(27, amuseParkTripAugustDate);
+            _outingRepo._listOfOutings.Add(bowlingTripJanuary);
+            _outingRepo._listOfOutings.Add(golfTripMay);
+            _outingRepo._listOfOutings.Add(golfTripJune);
+            _outingRepo._listOfOutings.Add(concertTripJuly);
+            _outingRepo._listOfOutings.Add(amuseParkTripAugust);
         }
     }
 }
