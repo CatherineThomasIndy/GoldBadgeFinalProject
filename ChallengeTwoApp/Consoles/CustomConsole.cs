@@ -35,7 +35,11 @@ namespace ChallengeTwoApp.Consoles
 
         public void PrintMenu()
         {
-            Console.WriteLine("");
+            Console.WriteLine("Welcome to the Komodo Claim Handling Screen.\n" +
+                "Select a menu item by entering the number of the desired function.\n" +
+                "1. See all claims\n" +
+                "2. Take care of the next claim\n" +
+                "3. Enter a new claim\n");
         }
     }
 }
