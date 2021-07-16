@@ -65,5 +65,14 @@ namespace ChapterFourRepo
             return returnTotalCost;
         }
         //Display outing costs by type
+        public List<decimal> GetCostOfAllOutings()
+        {
+            List<decimal> returnTotalCost = new List<decimal>();
+            foreach(IOuting outing in _listOfOutings)
+            {
+                returnTotalCost.Add(outing.TotalCost);
+            }
+            return returnTotalCost;
+        }
     }
 }
