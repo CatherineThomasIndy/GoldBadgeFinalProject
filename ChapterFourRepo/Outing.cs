@@ -29,6 +29,10 @@ namespace ChapterFourRepo
         public decimal CostPerPerson { get { return 30.00m; } }
         public decimal TotalCost { get { return CostPerPerson * Attendance; } }
         public GolfOuting() { }
+        public GolfOuting(int attendance)
+        {
+            Attendance = attendance;
+        }
         public GolfOuting(int attendance, DateTime date)
         {
             Attendance = attendance;
@@ -43,6 +47,10 @@ namespace ChapterFourRepo
         public decimal CostPerPerson { get { return 20.00m; } }
         public decimal TotalCost { get { return CostPerPerson * Attendance; } }
         public BowlingOuting() { }
+        public BowlingOuting(int attendance)
+        {
+            Attendance = attendance;
+        }
         public BowlingOuting(int attendance, DateTime date)
         {
             Attendance = attendance;
@@ -57,6 +65,10 @@ namespace ChapterFourRepo
         public decimal CostPerPerson { get { return 40.00m; } }
         public decimal TotalCost { get { return CostPerPerson * Attendance; } }
         public AmusementParkOuting() { }
+        public AmusementParkOuting(int attendance)
+        {
+            Attendance = attendance;
+        }
         public AmusementParkOuting(int attendance, DateTime date)
         {
             Attendance = attendance;
@@ -71,6 +83,10 @@ namespace ChapterFourRepo
         public decimal CostPerPerson { get { return 25.00m; } }
         public decimal TotalCost { get { return CostPerPerson * Attendance; } }
         public ConcertOuting() { }
+        public ConcertOuting(int attendance)
+        {
+            Attendance = attendance;
+        }
         public ConcertOuting(int attendance, DateTime date)
         {
             Attendance = attendance;
