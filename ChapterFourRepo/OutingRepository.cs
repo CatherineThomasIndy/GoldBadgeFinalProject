@@ -13,7 +13,6 @@ namespace ChapterFourRepo
         public List<BowlingOuting> _listOfBowlingOutings = new List<BowlingOuting>();
         public List<AmusementParkOuting> _listOfAmuseParkOutings = new List<AmusementParkOuting>();
         public List<ConcertOuting> _listOfConcertOutings = new List<ConcertOuting>();
-        //Create an individual outing
         public bool AddOutingToOutingList(IOuting outing)
         {
             int listOfOutingsCount = _listOfOutings.Count();
@@ -24,18 +23,15 @@ namespace ChapterFourRepo
             }
             else return false;
         }
-        //Display a list of all outings
         public List<IOuting> GetAllOutings()
         {
             return _listOfOutings;
         }
-        //Display combined cost for all outings
         public decimal ReturnSumOfTotalCost(List<decimal> returnTotalCost)
         {
             decimal total = returnTotalCost.Sum();
             return total;
         }
-        //I have to do each of these individually or it will throw an InvalidCastException... FML
         public List<decimal> GetCostOfGolfOutings()
         {
             List<decimal> totalCost = new List<decimal>();
@@ -72,7 +68,6 @@ namespace ChapterFourRepo
             }
             return totalCost;
         }
-        //Display outing costs by type
         public List<decimal> GetCostOfAllOutings()
         {
             List<decimal> returnTotalCost = new List<decimal>();

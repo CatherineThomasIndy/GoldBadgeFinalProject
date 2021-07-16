@@ -40,13 +40,7 @@ namespace ChapterFourApp
             string userInput = _con.ReadLine();
             return userInput;
         }
-        /*"Welcome to the Komodo Outings screen.\n" +
-                "Select a menu item by entering the number of the menu item you wish to open.\n" +
-                "1. Display a list of all outings\n" +
-                "2. Add an individual outing\n" +
-                "3. Display the total cost of all outings by type\n" +
-                "4. Display the cost of all outings\n" +
-                "5. Exit the app\n"*/
+
         private void OpenMenuItem(string userInput)
         {
             _con.Clear();
@@ -169,8 +163,9 @@ namespace ChapterFourApp
         {
             DateTime eventDate = EventDate();
             int attendance = Attendance();
+            InvalidDate(eventDate);
+            InvalidAttendance(attendance);
             GolfOuting outing = new GolfOuting(attendance, eventDate);
-            _outingRepo._listOfOutings.Add(outing);
             _outingRepo._listOfGolfOutings.Add(outing);
             bool successfulAdd = _outingRepo.AddOutingToOutingList(outing);
             AddedBool(successfulAdd);
@@ -179,8 +174,9 @@ namespace ChapterFourApp
         {
             DateTime eventDate = EventDate();
             int attendance = Attendance();
+            InvalidDate(eventDate);
+            InvalidAttendance(attendance);
             BowlingOuting outing = new BowlingOuting(attendance, eventDate);
-            _outingRepo._listOfOutings.Add(outing);
             _outingRepo._listOfBowlingOutings.Add(outing);
             bool successfulAdd = _outingRepo.AddOutingToOutingList(outing);
             AddedBool(successfulAdd);
@@ -189,8 +185,9 @@ namespace ChapterFourApp
         {
             DateTime eventDate = EventDate();
             int attendance = Attendance();
+            InvalidDate(eventDate);
+            InvalidAttendance(attendance);
             AmusementParkOuting outing = new AmusementParkOuting(attendance, eventDate);
-            _outingRepo._listOfOutings.Add(outing);
             _outingRepo._listOfAmuseParkOutings.Add(outing);
             bool successfulAdd = _outingRepo.AddOutingToOutingList(outing);
             AddedBool(successfulAdd);
@@ -199,19 +196,20 @@ namespace ChapterFourApp
         {
             DateTime eventDate = EventDate();
             int attendance = Attendance();
+            InvalidDate(eventDate);
+            InvalidAttendance(attendance);
             ConcertOuting outing = new ConcertOuting(attendance, eventDate);
-            _outingRepo._listOfOutings.Add(outing);
             _outingRepo._listOfConcertOutings.Add(outing);
             bool successfulAdd = _outingRepo.AddOutingToOutingList(outing);
             AddedBool(successfulAdd);
         }
         private DateTime EventDate()
         {
-            _con.Write("Enter the year that the event occurred/will occur (YYYY):\n");
+            _con.Write("Enter the year that the event occurred (YYYY):\n");
             string year = _con.ReadLine();
-            _con.Write("Enter the month that the event occurred/will occur (MM):\n");
+            _con.Write("Enter the month that the event occurred (MM):\n");
             string month = _con.ReadLine();
-            _con.Write("Enter the day of the month that the event occurred/will occur (DD):\n");
+            _con.Write("Enter the day of the month that the event occurred (DD):\n");
             string day = _con.ReadLine();
             string date = $"{month}/{day}/{year}";
             DateTime eventDate;
@@ -269,6 +267,25 @@ namespace ChapterFourApp
             _con.AnyKey();
             _con.ReadKey();
             RunMenu();
+        }
+        private void InvalidDate(DateTime dateTime)
+        {
+            DateTime startDate = new DateTime(0001, 01, 01, 00, 00, 00);
+            if (dateTime == startDate)
+            {
+                UnsuccessfulAdd();
+            }
+            else if (dateTime > DateTime.Now)
+            {
+                UnsuccessfulAdd();
+            }
+        }
+        private void InvalidAttendance(int attendance)
+        {
+            if (attendance <= 0)
+            {
+                UnsuccessfulAdd();
+            }
         }
         private void SeedList()
         {
