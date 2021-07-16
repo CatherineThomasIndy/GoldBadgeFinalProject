@@ -1,0 +1,10 @@
+C:\ElevenFiftyProjects\Assignments\GoldBadgeProject\GoldBadgeProject\ChapterFourApp\obj\Debug\ChallengeFourApp.csproj.AssemblyReference.cache
+C:\ElevenFiftyProjects\Assignments\GoldBadgeProject\GoldBadgeProject\ChapterFourApp\obj\Debug\ChallengeFourApp.csproj.CoreCompileInputs.cache
+C:\ElevenFiftyProjects\Assignments\GoldBadgeProject\GoldBadgeProject\ChapterFourApp\bin\Debug\ChapterFourApp.exe.config
+C:\ElevenFiftyProjects\Assignments\GoldBadgeProject\GoldBadgeProject\ChapterFourApp\bin\Debug\ChapterFourApp.exe
+C:\ElevenFiftyProjects\Assignments\GoldBadgeProject\GoldBadgeProject\ChapterFourApp\bin\Debug\ChapterFourApp.pdb
+C:\ElevenFiftyProjects\Assignments\GoldBadgeProject\GoldBadgeProject\ChapterFourApp\bin\Debug\ChapterFourRepo.dll
+C:\ElevenFiftyProjects\Assignments\GoldBadgeProject\GoldBadgeProject\ChapterFourApp\bin\Debug\ChapterFourRepo.pdb
+C:\ElevenFiftyProjects\Assignments\GoldBadgeProject\GoldBadgeProject\ChapterFourApp\obj\Debug\ChallengeFourApp.csproj.CopyComplete
+C:\ElevenFiftyProjects\Assignments\GoldBadgeProject\GoldBadgeProject\ChapterFourApp\obj\Debug\ChapterFourApp.exe
+C:\ElevenFiftyProjects\Assignments\GoldBadgeProject\GoldBadgeProject\ChapterFourApp\obj\Debug\ChapterFourApp.pdb

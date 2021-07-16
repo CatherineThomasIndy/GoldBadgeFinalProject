@@ -20,6 +20,7 @@ namespace ChapterFourApp
 
         public void Run()
         {
+            SeedList();
             RunMenu();
         }
 
@@ -56,7 +57,7 @@ namespace ChapterFourApp
                     DisplayAllOutings();
                     break;
                 case "2":
-                    CreateAnOuting();
+                    CreateANewOuting();
                     break;
                 case "3":
                     DisplayCostOfAllOutingsByType();
@@ -79,17 +80,75 @@ namespace ChapterFourApp
 
         private void DisplayAllOutings()
         {
-
+            foreach(IOuting outing in _outingRepo._listOfOutings)
+            {
+                _con.Write($"Type of Event: {outing.EventType}\n" +
+                    $"Date of Event: {outing.Date}\n" +
+                    $"Attendance: {outing.Attendance}\n" +
+                    $"Cost per Person: {outing.CostPerPerson}\n" +
+                    $"Total Cost of Outing: {outing.TotalCost}\n");
+            }
+            _con.AnyKey();
+            _con.ReadKey();
+            RunMenu();
         }
 
-        private void CreateAnOuting()
+        private void CreateANewOuting()
         {
-
+            _con.Write("Enter the number for which event you would like to create:\n" +
+                "1. Golf\n" +
+                "2. Bowling\n" +
+                "3. Amusement Park\n" +
+                "4. Concert\n");
+            string input = _con.ReadLine();
+            switch (input)
+            {
+                case "1":
+                    CreateGolfOuting();
+                    break;
+                case "2":
+                    CreateBowlingOuting();
+                    break;
+                case "3":
+                    CreateAmuseParkOuting();
+                    break;
+                case "4":
+                    CreateConcertOuting();
+                    break;
+                default:
+                    _con.InvalidInput();
+                    _con.AnyKey();
+                    _con.ReadKey();
+                    RunMenu();
+                    break;
+            }
         }
 
         private void DisplayCostOfAllOutingsByType()
         {
-
+            _con.Write("Enter the number for which event you would like to see the total costs:\n" +
+                "1. Golf\n" +
+                "2. Bowling\n" +
+                "3. Amusement Park\n" +
+                "4. Concert\n");
+            string input = _con.ReadLine();
+            switch (input)
+            {
+                case "1":
+                    break;
+                case "2":
+                    break;
+                case "3":
+                    break;
+                case "4":
+                    break;
+                default:
+                    _con.InvalidInput();
+                    _con.AnyKey();
+                    _con.ReadKey();
+                    RunMenu();
+                    break;
+            }
         }
 
         private void DisplayCostOfAllOutings()
@@ -97,6 +156,84 @@ namespace ChapterFourApp
 
         }
 
+        private void CreateGolfOuting()
+        {
+            DateTime eventDate = EventDate();
+            int attendance = Attendance();
+            GolfOuting outing = new GolfOuting(attendance, eventDate);
+            _outingRepo._listOfOutings.Add(outing);
+            bool successfulAdd = _outingRepo.AddOutingToOutingList(outing);
+            AddedBool(successfulAdd);
+        }
+        private void CreateBowlingOuting()
+        {
+            DateTime eventDate = EventDate();
+            int attendance = Attendance();
+            BowlingOuting outing = new BowlingOuting(attendance, eventDate);
+            _outingRepo._listOfOutings.Add(outing);
+            bool successfulAdd = _outingRepo.AddOutingToOutingList(outing);
+            AddedBool(successfulAdd);
+        }
+        private void CreateAmuseParkOuting()
+        {
+            DateTime eventDate = EventDate();
+            int attendance = Attendance();
+            AmusementParkOuting outing = new AmusementParkOuting(attendance, eventDate);
+            _outingRepo._listOfOutings.Add(outing);
+            bool successfulAdd = _outingRepo.AddOutingToOutingList(outing);
+            AddedBool(successfulAdd);
+        }
+        private void CreateConcertOuting()
+        {
+            DateTime eventDate = EventDate();
+            int attendance = Attendance();
+            ConcertOuting outing = new ConcertOuting(attendance, eventDate);
+            _outingRepo._listOfOutings.Add(outing);
+            bool successfulAdd = _outingRepo.AddOutingToOutingList(outing);
+            AddedBool(successfulAdd);
+        }
+        private DateTime EventDate()
+        {
+            _con.Write("Enter the year that the event occurred/will occur (YYYY):\n");
+            string year = _con.ReadLine();
+            _con.Write("Enter the month that the event occurred/will occur (MM):\n");
+            string month = _con.ReadLine();
+            _con.Write("Enter the day of the month that the event occurred/will occur (DD):\n");
+            string day = _con.ReadLine();
+            string date = year + month + day;
+            DateTime eventDate = DateTime.Parse(date);
+            return eventDate;
+        }
+        private int Attendance()
+        {
+            _con.Write("Enter the number of people who attended/will attend the event:\n");
+            string attendanceAsString = _con.ReadLine();
+            int attendance;
+            int.TryParse(attendanceAsString, out attendance);
+            return attendance;
+        }
+        private void AddedBool(bool successfulAdd)
+        {
+            if (successfulAdd == true)
+            {
+                SuccessfulAdd();
+            }
+            else UnsuccessfulAdd();
+        }
+        private void SuccessfulAdd()
+        {
+            _con.Write("The outing was successfully created!");
+            _con.AnyKey();
+            _con.ReadKey();
+            RunMenu();
+        }
+        private void UnsuccessfulAdd()
+        {
+            _con.Write("Something went wrong. The outing could not be successfully created.");
+            _con.AnyKey();
+            _con.ReadKey();
+            RunMenu();
+        }
         private void SeedList()
         {
             DateTime bowlingTripJanuaryDate = new DateTime(2019, 1, 21);
