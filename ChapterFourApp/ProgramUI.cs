@@ -135,12 +135,20 @@ namespace ChapterFourApp
             switch (input)
             {
                 case "1":
+                    List<decimal> golfOutingsCost = _outingRepo.GetCostOfAllOutingsByType(EventType.Golf);
+                    PrintTotalCost(golfOutingsCost);
                     break;
                 case "2":
+                    List<decimal> bowlingOutingsCost = _outingRepo.GetCostOfAllOutingsByType(EventType.Bowling);
+                    PrintTotalCost(bowlingOutingsCost);
                     break;
                 case "3":
+                    List<decimal> amuseParkOutingsCost = _outingRepo.GetCostOfAllOutingsByType(EventType.AmusementPark);
+                    PrintTotalCost(amuseParkOutingsCost);
                     break;
                 case "4":
+                    List<decimal> concertOutingsCost = _outingRepo.GetCostOfAllOutingsByType(EventType.Concert);
+                    PrintTotalCost(concertOutingsCost);
                     break;
                 default:
                     _con.InvalidInput();
@@ -153,7 +161,8 @@ namespace ChapterFourApp
 
         private void DisplayCostOfAllOutings()
         {
-
+            List<decimal> costOfAllOutings = _outingRepo.GetCostOfAllOutings();
+            PrintTotalCost(costOfAllOutings);
         }
 
         private void CreateGolfOuting()
@@ -230,6 +239,14 @@ namespace ChapterFourApp
         private void UnsuccessfulAdd()
         {
             _con.Write("Something went wrong. The outing could not be successfully created.");
+            _con.AnyKey();
+            _con.ReadKey();
+            RunMenu();
+        }
+        private void PrintTotalCost(List<decimal> outing)
+        {
+            decimal outingCostTotal = _outingRepo.ReturnSumOfTotalCost(outing);
+            _con.Write($"The total for all golf outings this year is ${outingCostTotal}\n");
             _con.AnyKey();
             _con.ReadKey();
             RunMenu();
