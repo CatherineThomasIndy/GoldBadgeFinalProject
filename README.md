@@ -3,7 +3,6 @@
 ##How To Clone the Repository
 1. Go to [the GitHub repository for this project.](https://github.com/CatherineThomasIndy/GoldBadgeFinalProject)
 2. Click on the green "Code" button, then click on the icon that looks like a clipboard.
-![Where to click in GitHub](./Pictures/where-to-click-github.jpg)
 3. Open the Command Prompt and navigate to the folder in which you would like the solution to go.
 	ex: `C:\Users\yourname\Desktop\GitCloneExample`
 4. Type `git clone `, paste the link copied in step 2, and hit Enter.
