@@ -17,13 +17,11 @@ namespace ChallengeTwoApp
         {
             _con = console;
         }
-
         public void Run()
         {
             SeedList();
             RunMenu();
         }
-
         private void RunMenu()
         {
             while (_isRunning)
@@ -39,7 +37,6 @@ namespace ChallengeTwoApp
             string userInput = _con.ReadLine();
             return userInput;
         }
-
         private void OpenMenuItem(string userInput)
         {
             _con.Clear();
@@ -60,13 +57,10 @@ namespace ChallengeTwoApp
                     break;
                 default:
                     _con.InvalidInput();
-                    _con.AnyKey();
-                    _con.ReadKey();
-                    RunMenu();
+                    Continue();
                     break;
             }
-        }
-        
+        }        
         private void PrintAllClaims()
         {
             _con.Clear();
@@ -76,9 +70,7 @@ namespace ChallengeTwoApp
             {
                 _con.Write($"{claim.ClaimID} | {claim.ClaimID} | {claim.Description} | {claim.Amount} | {claim.DateOfAccident} | {claim.DateOfClaim} | {claim.IsValid}");
             }
-            _con.AnyKey();
-            _con.ReadKey();
-            RunMenu();
+            Continue();
         }
         private void GetNextClaim()
         {
@@ -100,22 +92,16 @@ namespace ChallengeTwoApp
                     if (deleted)
                     {
                         _con.Write("The claim has been successfully removed from the queue to be processed.");
-                        _con.AnyKey();
-                        _con.ReadKey();
-                        RunMenu();
+                        Continue();
                     }
                     break;
                 case "n":
                     _con.Write("This claim will stay in the queue.");
-                    _con.AnyKey();
-                    _con.ReadKey();
-                    RunMenu();
+                    Continue();
                     break;
                 default:
                     _con.InvalidInput();
-                    _con.AnyKey();
-                    _con.ReadKey();
-                    RunMenu();
+                    Continue();
                     break;
             }
         }
@@ -129,9 +115,7 @@ namespace ChallengeTwoApp
             if(claimID <= 0)
             {
                 _con.Write("Please only enter a positive whole number that isn't already used by another claim.");
-                _con.AnyKey();
-                _con.ReadKey();
-                RunMenu();
+                Continue();
             }
             _con.Write("Enter the claim type:\n" +
                 "1. Car\n" +
@@ -143,9 +127,7 @@ namespace ChallengeTwoApp
             if(typeInput <= 0 || typeInput > 3)
             {
                 _con.InvalidInput();
-                _con.AnyKey();
-                _con.ReadKey();
-                RunMenu();
+                Continue();
             }
             newClaim.ClaimType = (ClaimType)typeInput;
             _con.Write("Enter a description of the incident:");
@@ -153,9 +135,7 @@ namespace ChallengeTwoApp
             if(description == "")
             {
                 _con.Write("You didn't enter anything!");
-                _con.AnyKey();
-                _con.ReadKey();
-                RunMenu();
+                Continue();
             }
             newClaim.Description = description;
             _con.Write("Enter the amount the claim is worth:");
@@ -167,8 +147,8 @@ namespace ChallengeTwoApp
                 UnsuccessfulAdd();
             }
             DateTime dateOfIncident = IncidentDate();
-            DateTime dateOfClaim = ClaimDate();
             InvalidDate(dateOfIncident);
+            DateTime dateOfClaim = ClaimDate();
             InvalidDate(dateOfClaim);
             newClaim.DateOfAccident = dateOfIncident;
             newClaim.DateOfClaim = dateOfClaim;
@@ -176,16 +156,12 @@ namespace ChallengeTwoApp
             if (added)
             {
                 _con.Write("The claim was successfully created!");
-                _con.AnyKey();
-                _con.ReadKey();
-                RunMenu();
+                Continue();
             }
             else
             {
                 _con.Write("Something went wrong. The claim could not be created.");
-                _con.AnyKey();
-                _con.ReadKey();
-                RunMenu();
+                Continue();
             }
         }
         private int CreateNewClaimID(string input)
@@ -197,8 +173,7 @@ namespace ChallengeTwoApp
             {
                 return 0;
             }
-            else return claimID;
-            
+            else return claimID;          
         }
         private void InvalidDate(DateTime dateTime)
         {
@@ -215,9 +190,7 @@ namespace ChallengeTwoApp
         private void UnsuccessfulAdd()
         {
             _con.Write("Something went wrong. The claim could not be successfully created.");
-            _con.AnyKey();
-            _con.ReadKey();
-            RunMenu();
+            Continue();
         }
         private DateTime IncidentDate()
         {
@@ -256,6 +229,12 @@ namespace ChallengeTwoApp
             {
                 return DateTime.MaxValue;
             }
+        }
+        private void Continue()
+        {
+            _con.AnyKey();
+            _con.ReadKey();
+            RunMenu();
         }
         private void ExitApplication()
         {

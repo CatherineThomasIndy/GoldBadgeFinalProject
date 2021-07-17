@@ -34,7 +34,6 @@ namespace ChallengeTwoRepo
             DateOfClaim = dateOfClaim;
         }
     }
-
     public enum ClaimType
     {
         Car = 1,

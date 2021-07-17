@@ -39,7 +39,6 @@ namespace ChallengeTwoRepo
             var firstClaim = _listOfClaims.FirstOrDefault();
             return firstClaim;
         }
-
         public bool DeleteClaim(Claim claim)
         {
             _listOfClaims.Remove(claim);
