@@ -17,13 +17,11 @@ namespace ChapterOne
         {
             _con = console;
         }
-
         public void Run()
         {
             SeedList();
             RunMenu();
         }
-
         private void RunMenu()
         {
             while (_isRunning)
@@ -32,7 +30,6 @@ namespace ChapterOne
                 OpenMenuItem(userInput);
             }
         }
-
         private string GetMenuSelection()
         {
             _con.Clear();
@@ -40,7 +37,6 @@ namespace ChapterOne
             string userInput = _con.ReadLine();
             return userInput;
         }
-
         private void OpenMenuItem(string userInput)
         {
             _con.Clear();
@@ -48,9 +44,7 @@ namespace ChapterOne
             {
                 case "1":
                     SeeFullMenu();
-                    _con.AnyKey();
-                    _con.ReadKey();
-                    RunMenu();
+                    Continue();
                     break;
                 case "2":
                     AddNewMeal();
@@ -63,21 +57,15 @@ namespace ChapterOne
                     break;
                 default:
                     _con.InvalidSelection();
-                    _con.AnyKey();
-                    _con.ReadKey();
-                    RunMenu();
+                    Continue();
                     break;
             }
         }
-
         private void SeeFullMenu()
         {
             PrintMenuItems();
-            _con.AnyKey();
-            _con.ReadKey();
-            RunMenu();
+            Continue();
         }
-
         private void PrintMenuItems()
         {
             _con.Clear();
@@ -96,7 +84,6 @@ namespace ChapterOne
                 _con.Write("\n");
             }
         }
-
         private void AddNewMeal()
         {
             _con.Clear();
@@ -111,9 +98,7 @@ namespace ChapterOne
             if (price == 0m)
             {
                 _con.Write("The price input was invalid. Please only use a numerical value such as 12.34.");
-                _con.AnyKey();
-                _con.ReadKey();
-                RunMenu();
+                Continue();
             }
             _con.Write("Enter a list of ingredients (ex: beef, cheese, lettuce)");
             string ingredientsAsString = _con.ReadLine();
@@ -126,20 +111,14 @@ namespace ChapterOne
             if (menuItemList.Contains(item))
             {
                 _con.Write("The new meal was successfully added!\n");
-                _con.AnyKey();
-                _con.ReadKey();
-                RunMenu();
+                Continue();
             }
             else
             {
                 _con.Write("Something went wrong. The meal could not be added.\n");
-                _con.AnyKey();
-                _con.ReadKey();
-                RunMenu();
+                Continue();
             }
-
         }
-
         private void RemoveMeal()
         {
             List<Menu> listOfMenuItems = _menuRepo.GetAllMenuItems();
@@ -158,26 +137,26 @@ namespace ChapterOne
                 if (updatedMenuItemCount == initialMenuItemCount - 1)
                 {
                     _con.Write("The meal was successfully removed from the menu!\n");
-                    _con.AnyKey();
-                    _con.ReadKey();
-                    RunMenu();
+                    Continue();
                 }
                 else
                 {
                     _con.Write("Something went wrong. The meal could not be removed from the menu.\n");
-                    _con.AnyKey();
-                    _con.ReadKey();
-                    RunMenu();
+                    Continue();
                 }
             }
             else
             {
                 _con.Write("Something went wrong. The meal could not be removed from the menu.\n");
-                _con.AnyKey();
-                RunMenu();
+                Continue();
             }
         }
-
+        private void Continue()
+        {
+            _con.AnyKey();
+            _con.ReadKey();
+            RunMenu();
+        }
         private void ExitApplication()
         {
             _con.Write("Good-bye!");

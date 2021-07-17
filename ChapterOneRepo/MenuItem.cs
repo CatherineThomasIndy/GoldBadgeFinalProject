@@ -13,9 +13,7 @@ namespace ChapterOneRepo
         public string Description { get; set; }
         public List<string> ListOfIngredients { get; set; }
         public decimal Price { get; set; }
-
         public Menu(){ }
-
         public Menu(int mealNumber, string mealName, string description, List<string> listOfIngredients, decimal price)
         {
             MealNumber = mealNumber;

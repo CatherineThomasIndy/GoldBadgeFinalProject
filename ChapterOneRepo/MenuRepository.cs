@@ -9,7 +9,6 @@ namespace ChapterOneRepo
     public class MenuRepository
     {
         public List<Menu> _menuItems = new List<Menu>();
-
         public bool AddItemToMenu(Menu item)
         {
             int menuItemsCount = _menuItems.Count();
@@ -20,12 +19,10 @@ namespace ChapterOneRepo
             }
             else return false;
         }
-
         public List<Menu> GetAllMenuItems()
         {
             return _menuItems;
         }
-
         public Menu GetMenuItemByMenuItemNumber(int menuItemNumber)
         {
             foreach (Menu item in _menuItems)
@@ -37,12 +34,10 @@ namespace ChapterOneRepo
             }
             return null;
         }
-
         public bool DeleteMenuItem(Menu item)
         {
             return _menuItems.Remove(item);
         }
-
         public bool DeleteMenuItemByNumber(int menuItemNumber)
         {
             Menu item = GetMenuItemByMenuItemNumber(menuItemNumber);
