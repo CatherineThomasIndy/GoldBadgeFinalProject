@@ -59,9 +59,7 @@ namespace ChapterOne
                     RemoveMeal();
                     break;
                 case "4":
-                    _con.Write("Good-bye!");
-                    _con.ReadKey();
-                    _isRunning = false;
+                    ExitApplication();
                     break;
                 default:
                     _con.InvalidSelection();
@@ -180,6 +178,12 @@ namespace ChapterOne
             }
         }
 
+        private void ExitApplication()
+        {
+            _con.Write("Good-bye!");
+            _con.ReadKey();
+            _isRunning = false;
+        }
         private void SeedList()
         {
             List<string> hamburgerIngredients = new List<string>() { "beef", "hamburger bun" };
