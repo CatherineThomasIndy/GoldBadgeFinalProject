@@ -9,7 +9,6 @@ namespace ChallengeTwoRepo
     public class ClaimRepository
     {
         List<Claim> _listOfClaims = new List<Claim>();
-        //Create a new claim
         public bool AddClaimToQueue(Claim claim)
         {
             int initialClaimsCount = _listOfClaims.Count();
@@ -20,7 +19,6 @@ namespace ChallengeTwoRepo
             }
             else return false;
         }
-        //Read claim
         public List<Claim> GetAllClaims()
         {
             return _listOfClaims;
@@ -41,7 +39,7 @@ namespace ChallengeTwoRepo
             var firstClaim = _listOfClaims.FirstOrDefault();
             return firstClaim;
         }
-        //Delete claim
+
         public bool DeleteClaim(Claim claim)
         {
             _listOfClaims.Remove(claim);

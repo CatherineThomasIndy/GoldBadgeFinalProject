@@ -56,7 +56,7 @@ namespace ChallengeTwoApp
                     CreateNewClaim();
                     break;
                 case "4":
-                    _isRunning = false;
+                    ExitApplication();
                     break;
                 default:
                     _con.InvalidInput();
@@ -66,6 +66,7 @@ namespace ChallengeTwoApp
                     break;
             }
         }
+        
         private void PrintAllClaims()
         {
             _con.Clear();
@@ -123,10 +124,11 @@ namespace ChallengeTwoApp
             Claim newClaim = new Claim();
             _con.Write("Enter a claim ID for the new claim:");
             string idInput = _con.ReadLine();
-            int claimID = CreateNewClaimID(idInput);
+            int claimID = 
+                CreateNewClaimID(idInput);
             if(claimID <= 0)
             {
-                _con.Write("Please only enter a positive whole number.");
+                _con.Write("Please only enter a positive whole number that isn't already used by another claim.");
                 _con.AnyKey();
                 _con.ReadKey();
                 RunMenu();
@@ -255,7 +257,12 @@ namespace ChallengeTwoApp
                 return DateTime.MaxValue;
             }
         }
-
+        private void ExitApplication()
+        {
+            _con.Write("Good-bye!");
+            _con.ReadKey();
+            _isRunning = false;
+        }
         private void SeedList()
         {
             DateTime carIncident = new DateTime(2021, 03, 17);

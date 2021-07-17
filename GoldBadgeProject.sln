@@ -15,12 +15,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChallengeFourRepo", "Chapte
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChallengeFourTests", "ChapterFourTests\ChallengeFourTests.csproj", "{4E7C77BA-6A00-4043-900E-CE27CB30FACC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChallengeSixApp", "ChallengeSixApp\ChallengeSixApp.csproj", "{1DB5FF46-E7A3-4777-8D14-C11B71331B38}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChallengeSixRepo", "ChallengeSixRepo\ChallengeSixRepo.csproj", "{7BD8E30F-0660-44D6-8BE4-52B92B25B42A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChallengeSixTests", "ChallengeSixTests\ChallengeSixTests.csproj", "{EE9D6E91-4E66-46CB-8731-A72932EA5D66}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChallengeTwoApp", "ChallengeTwoApp\ChallengeTwoApp.csproj", "{7AA4A27C-F4B5-4CF2-9326-083BBDB75DE9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChallengeTwoRepo", "ChallengeTwoRepo\ChallengeTwoRepo.csproj", "{871D3415-E47A-481A-89A5-1900564E4010}"
@@ -57,18 +51,6 @@ Global
 		{4E7C77BA-6A00-4043-900E-CE27CB30FACC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E7C77BA-6A00-4043-900E-CE27CB30FACC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E7C77BA-6A00-4043-900E-CE27CB30FACC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1DB5FF46-E7A3-4777-8D14-C11B71331B38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1DB5FF46-E7A3-4777-8D14-C11B71331B38}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1DB5FF46-E7A3-4777-8D14-C11B71331B38}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1DB5FF46-E7A3-4777-8D14-C11B71331B38}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7BD8E30F-0660-44D6-8BE4-52B92B25B42A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7BD8E30F-0660-44D6-8BE4-52B92B25B42A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7BD8E30F-0660-44D6-8BE4-52B92B25B42A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7BD8E30F-0660-44D6-8BE4-52B92B25B42A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EE9D6E91-4E66-46CB-8731-A72932EA5D66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EE9D6E91-4E66-46CB-8731-A72932EA5D66}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EE9D6E91-4E66-46CB-8731-A72932EA5D66}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EE9D6E91-4E66-46CB-8731-A72932EA5D66}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7AA4A27C-F4B5-4CF2-9326-083BBDB75DE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7AA4A27C-F4B5-4CF2-9326-083BBDB75DE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7AA4A27C-F4B5-4CF2-9326-083BBDB75DE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
