@@ -6,7 +6,39 @@ using System.Threading.Tasks;
 
 namespace ChallengeTwoRepo
 {
-    class ClaimRepository
+    public class ClaimRepository
     {
+        List<Claim> _listOfClaims = new List<Claim>();
+        //Create a new claim
+        public bool AddClaimToQueue(Claim claim)
+        {
+            int initialClaimsCount = _listOfClaims.Count();
+            _listOfClaims.Add(claim);
+            if (_listOfClaims.Count() == initialClaimsCount + 1)
+            {
+                return true;
+            }
+            else return false;
+        }
+        //Read claim
+        public List<Claim> GetAllClaims()
+        {
+            return _listOfClaims;
+        }
+        public Claim GetNextClaim()
+        {
+            var firstClaim = _listOfClaims.FirstOrDefault();
+            return firstClaim;
+        }
+        //Delete claim
+        public bool DeleteClaim(Claim claim)
+        {
+            _listOfClaims.Remove(claim);
+            if (_listOfClaims.Contains(claim))
+            {
+                return false;
+            }
+            else return true;
+        }
     }
 }

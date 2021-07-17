@@ -39,7 +39,13 @@ namespace ChallengeTwoApp.Consoles
                 "Select a menu item by entering the number of the desired function.\n" +
                 "1. See all claims\n" +
                 "2. Take care of the next claim\n" +
-                "3. Enter a new claim\n");
+                "3. Enter a new claim\n" +
+                "4. Exit application\n");
+        }
+
+        public void InvalidInput()
+        {
+            Console.WriteLine("Input was invalid.");
         }
     }
 }

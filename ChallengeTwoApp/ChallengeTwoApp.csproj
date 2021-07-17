@@ -43,11 +43,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Consoles\ConsoleDataFormatter.cs" />
+    <Compile Include="Consoles\CustomConsole.cs" />
+    <Compile Include="Consoles\ICustomConsole.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="ProgramUI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ChallengeTwoRepo\ChallengeTwoRepo.csproj">
+      <Project>{871D3415-E47A-481A-89A5-1900564E4010}</Project>
+      <Name>ChallengeTwoRepo</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
