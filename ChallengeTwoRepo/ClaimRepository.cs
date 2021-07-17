@@ -25,6 +25,17 @@ namespace ChallengeTwoRepo
         {
             return _listOfClaims;
         }
+        public bool ClaimIDExists(int claimID)
+        {
+            foreach(Claim claim in _listOfClaims)
+            {
+                if (claim.ClaimID == claimID)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
         public Claim GetNextClaim()
         {
             var firstClaim = _listOfClaims.FirstOrDefault();

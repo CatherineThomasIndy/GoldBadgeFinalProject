@@ -43,7 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Consoles\ConsoleDataFormatter.cs" />
     <Compile Include="Consoles\CustomConsole.cs" />
     <Compile Include="Consoles\ICustomConsole.cs" />
     <Compile Include="Program.cs" />
