@@ -17,13 +17,11 @@ namespace ChapterFourApp
         {
             _con = console;
         }
-
         public void Run()
         {
             SeedList();
             RunMenu();
         }
-
         private void RunMenu()
         {
             while (_isRunning)
@@ -32,7 +30,6 @@ namespace ChapterFourApp
                 OpenMenuItem(userInput);
             }
         }
-
         private string GetMenuSelection()
         {
             _con.Clear();
@@ -40,11 +37,9 @@ namespace ChapterFourApp
             string userInput = _con.ReadLine();
             return userInput;
         }
-
         private void OpenMenuItem(string userInput)
         {
             _con.Clear();
-
             switch (userInput)
             {
                 case "1":
@@ -60,18 +55,14 @@ namespace ChapterFourApp
                     DisplayCostOfAllOutings();
                     break;
                 case "5":
-                    _con.Write("Good-bye!");
-                    _isRunning = false;
+                    ExitApplication();
                     break;
                 default:
                     _con.InvalidInput();
-                    _con.AnyKey();
-                    _con.ReadKey();
-                    RunMenu();
+                    Continue();
                     break;
             }
         }
-
         private void DisplayAllOutings()
         {
             foreach(IOuting outing in _outingRepo._listOfOutings)
@@ -82,11 +73,8 @@ namespace ChapterFourApp
                     $"Cost per Person: {outing.CostPerPerson}\n" +
                     $"Total Cost of Outing: {outing.TotalCost}\n");
             }
-            _con.AnyKey();
-            _con.ReadKey();
-            RunMenu();
+            Continue();
         }
-
         private void CreateANewOuting()
         {
             _con.Write("Enter the number for which event you would like to create:\n" +
@@ -94,30 +82,19 @@ namespace ChapterFourApp
                 "2. Bowling\n" +
                 "3. Amusement Park\n" +
                 "4. Concert\n");
-            string input = _con.ReadLine();
-            switch (input)
+            string eventInputAsString = _con.ReadLine();
+            int eventInput;
+            int.TryParse(eventInputAsString, out eventInput);
+            if(eventInput >= 1 && eventInput <= 4)
             {
-                case "1":
-                    CreateGolfOuting();
-                    break;
-                case "2":
-                    CreateBowlingOuting();
-                    break;
-                case "3":
-                    CreateAmuseParkOuting();
-                    break;
-                case "4":
-                    CreateConcertOuting();
-                    break;
-                default:
-                    _con.InvalidInput();
-                    _con.AnyKey();
-                    _con.ReadKey();
-                    RunMenu();
-                    break;
+                CreateOuting(eventInput);
+            }
+            else
+            {
+                _con.InvalidInput();
+                Continue();
             }
         }
-
         private void DisplayCostOfAllOutingsByType()
         {
             _con.Write("Enter the number for which event you would like to see the total costs:\n" +
@@ -146,58 +123,60 @@ namespace ChapterFourApp
                     break;
                 default:
                     _con.InvalidInput();
-                    _con.AnyKey();
-                    _con.ReadKey();
-                    RunMenu();
+                    Continue();
                     break;
             }
         }
-
         private void DisplayCostOfAllOutings()
         {
             List<decimal> costOfAllOutings = _outingRepo.GetCostOfAllOutings();
             PrintTotalCostOfAllOutings(costOfAllOutings);
         }
-
-        private void CreateGolfOuting()
+        private void CreateOuting(int eventInput)
         {
             DateTime eventDate = EventDate();
-            int attendance = Attendance();
             InvalidDate(eventDate);
+            int attendance = Attendance();
             InvalidAttendance(attendance);
+            switch (eventInput)
+            {
+                case 1:
+                    CreateGolfOuting(eventDate, attendance);
+                    break;
+                case 2:
+                    CreateBowlingOuting(eventDate, attendance);
+                    break;
+                case 3:
+                    CreateAmuseParkOuting(eventDate, attendance);
+                    break;
+                case 4:
+                    CreateConcertOuting(eventDate, attendance);
+                    break;
+            }
+        }
+        private void CreateGolfOuting(DateTime eventDate, int attendance)
+        {
             GolfOuting outing = new GolfOuting(attendance, eventDate);
             _outingRepo._listOfGolfOutings.Add(outing);
             bool successfulAdd = _outingRepo.AddOutingToOutingList(outing);
             AddedBool(successfulAdd);
         }
-        private void CreateBowlingOuting()
-        {
-            DateTime eventDate = EventDate();
-            int attendance = Attendance();
-            InvalidDate(eventDate);
-            InvalidAttendance(attendance);
+        private void CreateBowlingOuting(DateTime eventDate, int attendance)
+        {      
             BowlingOuting outing = new BowlingOuting(attendance, eventDate);
             _outingRepo._listOfBowlingOutings.Add(outing);
             bool successfulAdd = _outingRepo.AddOutingToOutingList(outing);
             AddedBool(successfulAdd);
         }
-        private void CreateAmuseParkOuting()
+        private void CreateAmuseParkOuting(DateTime eventDate, int attendance)
         {
-            DateTime eventDate = EventDate();
-            int attendance = Attendance();
-            InvalidDate(eventDate);
-            InvalidAttendance(attendance);
             AmusementParkOuting outing = new AmusementParkOuting(attendance, eventDate);
             _outingRepo._listOfAmuseParkOutings.Add(outing);
             bool successfulAdd = _outingRepo.AddOutingToOutingList(outing);
             AddedBool(successfulAdd);
         }
-        private void CreateConcertOuting()
+        private void CreateConcertOuting(DateTime eventDate, int attendance)
         {
-            DateTime eventDate = EventDate();
-            int attendance = Attendance();
-            InvalidDate(eventDate);
-            InvalidAttendance(attendance);
             ConcertOuting outing = new ConcertOuting(attendance, eventDate);
             _outingRepo._listOfConcertOutings.Add(outing);
             bool successfulAdd = _outingRepo.AddOutingToOutingList(outing);
@@ -241,32 +220,24 @@ namespace ChapterFourApp
         private void SuccessfulAdd()
         {
             _con.Write("The outing was successfully created!");
-            _con.AnyKey();
-            _con.ReadKey();
-            RunMenu();
+            Continue();
         }
         private void UnsuccessfulAdd()
         {
             _con.Write("Something went wrong. The outing could not be successfully created.");
-            _con.AnyKey();
-            _con.ReadKey();
-            RunMenu();
+            Continue();
         }
         private void PrintTotalCost(EventType eventType, List<decimal> outing)
         {
             decimal outingCostTotal = _outingRepo.ReturnSumOfTotalCost(outing);
             _con.Write($"The total for all {eventType} events is ${outingCostTotal}\n");
-            _con.AnyKey();
-            _con.ReadKey();
-            RunMenu();
+            Continue();
         }
         private void PrintTotalCostOfAllOutings(List<decimal> outing)
         {
             decimal outingCostTotal = _outingRepo.ReturnSumOfTotalCost(outing);
             _con.Write($"The total for all outings is ${outingCostTotal}\n");
-            _con.AnyKey();
-            _con.ReadKey();
-            RunMenu();
+            Continue();
         }
         private void InvalidDate(DateTime dateTime)
         {
@@ -286,6 +257,16 @@ namespace ChapterFourApp
             {
                 UnsuccessfulAdd();
             }
+        }
+        private void Continue()
+        {
+            _con.AnyKey();
+            _con.ReadKey();
+            RunMenu();
+        }
+        private void ExitApplication()
+        {
+            _isRunning = false;
         }
         private void SeedList()
         {
